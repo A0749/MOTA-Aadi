@@ -411,16 +411,15 @@ body {
 	  border-bottom: 1px solid #4F96BA;
 	  width: 100%;
   }
-  .sub-menu-lists{
-	margin-bottom: 12px;
+  .sub-menu-head{
+	margin-top: 16px;
   }
   .banners-area {
 	  margin-top: 20px;
 	  padding-top: 15px;
   }
   @media only screen and (max-width: 768px) {
-	
-	
+
 	  .sub-menu-head {
 		  color:#fff;
 	  }
@@ -653,7 +652,7 @@ body {
 	  /* List Separator: Outer Border */
 	  
 	  header.dark ul.main-nav > li > a {
-		  border-right: 1px solid #bbb;
+		  border-right: 1px solid #055f86;
 	  }
 	  header.mega ul.main-nav > li > a {
 		  border-right: 1px solid #666;
@@ -899,4 +898,50 @@ svg path{
 /* Style for text in grid item */
 .gridItemText {
     flex: 1;
+}
+
+/* Define keyframes for showing and hiding elements */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px); /* Slide in from below */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Final position */
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0); /* Start from the current position */
+    }
+    to {
+        opacity: 0;
+        transform: translateY(10px); /* Slide out downwards */
+    }
+}
+
+/* Apply animations for showing */
+.show-card {
+    animation: fadeIn 1s forwards; /* Fade-in for card */
+}
+
+.hide-card {
+    animation: fadeOut 0s forwards; /* Fade-out for card */
+}
+
+.show-grid {
+    animation: fadeIn 1s forwards; /* Fade-in for grid */
+}
+
+.hide-grid {
+    animation: fadeOut 0s forwards; /* Fade-out for grid */
+}
+
+/* Add highlight effect for the hovered area */
+.highlighted {
+    background-color: #f0f0f0;
+    transition: background-color 0.3s ease;
 }

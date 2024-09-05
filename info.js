@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const areas = {
         'INMP': {
             items: [
-                { image: './images/rssm.jpg', heading: 'Raja Shankar Shah Museum, Jabalpur, MP', paragraph: 'quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-                { image: './images/rssm.jpg', heading: 'Museum 2', subheading: 'Description 2', paragraph: 'Details about Museum 2.' }
+                { image: './images/rssm.jpg', heading: 'Raja Shankar Shah Museum, Jabalpur, MP', paragraph: 'Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
+                { image: './images/dummy.png', heading: 'Shri Badal Bhoi State Tribal Museum, Chhindwara', subheading: 'Description 2', paragraph: 'Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur' }
             ]
         },
 
@@ -57,31 +57,31 @@ document.addEventListener('DOMContentLoaded', () => {
             image: './images/dummy.jpg',
             heading: 'Ropuiliani, Freedom Fighters Museum',
             subheading: 'Kelsih, Mizoram',
-            paragraph: 'Detailed description for Area 3.'
+            paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
         },
         'INTG': {
             image: './images/dummy.jpg',
             heading: 'Freedom Fighters Museum',
             subheading: 'Heyderabad, Telangana',
-            paragraph: 'Detailed description for Area 3.'
+            paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
         },
         'INAP': {
             image: './images/dummy.jpg',
             heading: 'Freedom Fighters Museum',
             subheading: 'Lammasingi, Andhra Pradesh',
-            paragraph: 'Detailed description for Area 3.'
+            paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
         },
         'INGA': {
             image: './images/dummy.jpg',
             heading: 'Freedom Fighters Museum',
             subheading: 'Ponda, Goa',
-            paragraph: 'Detailed description for Area 3.'
+            paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
         },
         'INKL': {
             image: './images/dummy.jpg',
             heading: 'Freedom Fighters Museum',
             subheading: 'Kozhikode, Kerala',
-            paragraph: 'Detailed description for Area 3.'
+            paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
         },
     };
     
@@ -94,6 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         card.style.display = 'block';
         gridContainer.style.display = 'none'; // Hide grid container
+
+        card.classList.remove('hide-card');
+        card.classList.add('show-card');
+        gridContainer.classList.remove('show-grid');
+        gridContainer.classList.add('hide-grid');
     };
 
     const showGrid = (content) => {
@@ -113,6 +118,12 @@ document.addEventListener('DOMContentLoaded', () => {
             gridContainer.appendChild(gridItem);
         });
 
+         // Add animation classes
+    gridContainer.classList.remove('hide-grid');
+    gridContainer.classList.add('show-grid');
+    card.classList.remove('show-card');
+    card.classList.add('hide-card');
+
         card.style.display = 'none'; // Hide card
         gridContainer.style.display = 'grid'; // Show grid container
     };
@@ -121,6 +132,10 @@ document.addEventListener('DOMContentLoaded', () => {
         card.style.display = 'none';
         gridContainer.style.display = 'none';
         currentContent = null;
+        card.classList.remove('show-card');
+        card.classList.add('hide-card');
+        gridContainer.classList.remove('show-grid');
+        gridContainer.classList.add('hide-grid');
     };
 
     const handleHover = (event, content) => {
