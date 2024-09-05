@@ -1,6 +1,7 @@
 // script.js
 document.addEventListener('DOMContentLoaded', () => {
     const card = document.getElementById('cardMap');
+    const gridContainer = document.getElementById('gridContainer');
     const cardImage = document.getElementById('card-image');
     const cardHeading = document.getElementById('card-heading');
     const cardSubheading = document.getElementById('card-subheading');
@@ -11,18 +12,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollThreshold = 100; // Define how much scroll should trigger hiding or showing the card
     let lastScrollTop = 50;
 
+    let currentContent = null; // To track the currently displayed content
+    let highlightedElement = null; // To track the currently highlighted element
+
     const areas = {
         'INMP': {
-            image: './images/rssm.jpg',
-            heading: 'Raja Shankar Shah, Tribal Freedom Fighters Museum',
-            subheading: 'Jabalpur, Madhya Pradesh',
-            paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-        },
-        'INMP': {
-            image: './images/rssm.jpg',
-            heading: 'Raja Shankar Shah, Tribal Freedom Fighters Museum',
-            subheading: 'Jabalpur, Madhya Pradesh',
-            paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+            items: [
+                { image: './images/rssm.jpg', heading: 'Raja Shankar Shah Museum, Jabalpur, MP', paragraph: 'quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
+                { image: './images/rssm.jpg', heading: 'Museum 2', subheading: 'Description 2', paragraph: 'Details about Museum 2.' }
+            ]
         },
 
         'INJH': {
@@ -87,36 +85,83 @@ document.addEventListener('DOMContentLoaded', () => {
         },
     };
     
-    const showCard = (event, content) => {
+   
+    const showCard = (content) => {
         cardImage.src = content.image;
         cardHeading.textContent = content.heading;
         cardSubheading.textContent = content.subheading;
         cardParagraph.textContent = content.paragraph;
 
         card.style.display = 'block';
-        card.style.right = '0px';
-
-        const target = event.target;
-        target.classList.add('highlighted');
+        gridContainer.style.display = 'none'; // Hide grid container
     };
 
-    const hideCard = (event) => {
-        const target = event.target;
-        target.classList.remove('highlighted');
+    const showGrid = (content) => {
+        gridContainer.innerHTML = ''; // Clear previous content
+
+        content.items.forEach(item => {
+            const gridItem = document.createElement('div');
+            gridItem.className = 'gridItem';
+            gridItem.innerHTML = `
+                <img src="${item.image}" alt="${item.heading}">
+                <div class="gridItemText">
+                    <h4>${item.heading}</h4>
+                    
+                    <p>${item.paragraph}</p>
+                </div>
+            `;
+            gridContainer.appendChild(gridItem);
+        });
+
+        card.style.display = 'none'; // Hide card
+        gridContainer.style.display = 'grid'; // Show grid container
+    };
+
+    const hideContent = () => {
+        card.style.display = 'none';
+        gridContainer.style.display = 'none';
+        currentContent = null;
+    };
+
+    const handleHover = (event, content) => {
+        // Hide previously displayed content
+        if (currentContent) {
+            hideContent();
+        }
+
+        // Remove highlight from the previously highlighted element
+        if (highlightedElement) {
+            highlightedElement.classList.remove('highlighted');
+        }
+
+        // Show new content
+        if (content.items) {
+            showGrid(content);
+        } else {
+            showCard(content);
+        }
+
+        // Update the currently highlighted element
+        highlightedElement = event.target;
+        highlightedElement.classList.add('highlighted');
+        currentContent = content; // Track the currently displayed content
     };
 
     Object.keys(areas).forEach(id => {
         const element = document.getElementById(id);
         element.addEventListener('mouseover', (event) => {
-            showCard(event, areas[id]);
+            handleHover(event, areas[id]);
         });
-        element.addEventListener('mouseout', hideCard);
+        element.addEventListener('mouseout', () => {
+            // Optionally remove highlight on mouse out if needed
+            // element.classList.remove('highlighted');
+        });
     });
 
-    // Show the default card (replace 'INMP' with the desired default area ID)
+    // Show the default content (replace 'INMP' with the desired default area ID)
     const defaultArea = 'INMP';
     if (areas[defaultArea]) {
-        showCard({ target: document.getElementById(defaultArea) }, areas[defaultArea]);
+        handleHover({ target: document.getElementById(defaultArea) }, areas[defaultArea]);
     }
 
     // Hide or show card based on scroll direction and position relative to the header
@@ -130,13 +175,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
                 // Scrolling down and past the threshold
                 card.style.display = 'block';
+                gridContainer.style.display = 'none'; // Hide grid container
             } else if (scrollTop < lastScrollTop && scrollTop > scrollThreshold) {
                 // Scrolling up and past the threshold
                 card.style.display = 'none';
+                gridContainer.style.display = 'none'; // Hide grid container
             }
         } else {
             // Before the header's bottom, hide the card
             card.style.display = 'none';
+            gridContainer.style.display = 'none'; // Hide grid container
         }
 
         lastScrollTop = scrollTop;
