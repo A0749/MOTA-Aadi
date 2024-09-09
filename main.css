@@ -2,6 +2,8 @@
 # Top Bar
 --------------------------------------------------------------*/
 
+html { scroll-behavior: smooth; }
+
 a.tooltiplink {
     position: relative;
 }
@@ -47,6 +49,7 @@ body p {
 #nav > ul > li ul a {
 	/* background: #238; */
 	border-radius: 3px;
+	scroll-behavior: smooth;
 }
 /* #nav > ul > li ul a:hover, #nav > ul > li ul a:focus {
 	background: #887722;
@@ -201,6 +204,7 @@ body p {
 #nav > ul > li ul a {
 	/* background: #238; */
 	border-radius: 3px;
+	scroll-behavior: smooth;
 }
 /* #nav > ul > li ul a:hover, #nav > ul > li ul a:focus {
 	background: #887722;
@@ -784,17 +788,31 @@ body {
 	background-color: #f4a200 !important;
 }
 
-
-
-.containerMap{
-    height: 100vh; /* Make sure the container takes the full height of the viewport */
-	
+.container-map{
+	background: #055f86;
+	min-height: 100vh;
+	height: auto;
+    padding-top: 50px;
+	color: #efefef;
+	overflow: hidden;
+}
+.cardMap{
+ vertical-align: middle;
+ padding-top: 10%;
 
 }
+
+.container-map p{
+	padding-right:10% ;
+	
+}
+
 
 .svg-container {
     position: relative;
 	width: 100%;
+	margin-top: 2%;
+
 }
 svg{
 	width: 50%;
@@ -802,36 +820,16 @@ svg{
 
 }
 .containerCard{
-	width: 40%;
+	width: 50%;
 	float: right;
-	margin-top: 2%;
+}
+.containerCard h2{
+	width: 100%;
+	margin: 0 auto;;
+	padding: 24px 0;
+	
 }
 
-.containerMap .cardMap {
-    position: relative;
-    width: 450px;
-    padding: 20px;
-    background: white;
-    border: 1px solid #ccc;
-    filter: drop-shadow(0 0 0.65rem rgba(0, 0, 0, 0.526));
-    display: none;
-    z-index: 10;
-}
-
-
-.containerMap .card-image {
-    width: 100%;
-    height: auto;
-}
-.containerMap .cardMap h2{
-    padding-top: 12px;
-	font-size: 24px;
-
-}
-.containerMap .cardMap h3{
-    padding-bottom: 12px;
-	font-size: 18px;
-}
 
 svg{
     filter: drop-shadow(0 0 0.65rem rgba(0, 0, 0, 0.526));
@@ -871,34 +869,7 @@ svg path{
   }
 
 
-/* Style for the grid container */
-.gridContainer {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr); /* Two equal-width columns */
-    gap: 10px; /* Space between items */
-    width: 50%;
-}
 
-/* Style for each grid item */
-.gridItem {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-/* Style for the image in grid item */
-.gridItem img {
-    max-width: 25%;
-    object-fit: cover;
-    margin-right: 10px;
-}
-
-/* Style for text in grid item */
-.gridItemText {
-    flex: 1;
-}
 
 /* Define keyframes for showing and hiding elements */
 @keyframes fadeIn {
@@ -944,4 +915,14 @@ svg path{
 .highlighted {
     background-color: #f0f0f0;
     transition: background-color 0.3s ease;
+}
+
+.containerHo{
+	width: 90%;
+	margin: auto;
+	box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.15);
+
+}
+.imageMap{
+	width: 100%;
 }
